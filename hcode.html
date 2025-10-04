@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Insta‑Inspired Login</title>
+  <style>
+    :root{
+      --bg:#fafafa;
+      --card:#ffffff;
+      --muted:#8e8e8e;
+      --accent:#0095f6; /* different from Instagram purple */
+      --radius:12px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    html,body{height:100%;}
+    body{
+      margin:0;
+      display:grid;
+      place-items:center;
+      background:linear-gradient(180deg, #ffffff 0%, var(--bg) 100%);
+      color:#111;
+    }
+    .wrap{
+      display:flex;
+      gap:40px;
+      align-items:center;
+      padding:32px;
+    }
+    .card{
+      background:var(--card);
+      border-radius:var(--radius);
+      box-shadow:0 6px 18px rgba(15,15,15,0.08);
+      padding:28px;
+      width:340px;
+    }
+    .branding{
+      text-align:center;
+      margin-bottom:18px;
+    }
+    .logo{
+      font-weight:700;
+      font-size:28px;
+      letter-spacing:1px;
+    }
+    .sub{color:var(--muted); font-size:13px; margin-top:6px}
+    form{display:flex;flex-direction:column;gap:10px}
+    input[type="text"], input[type="password"]{
+      height:44px;
+      padding:0 12px;
+      border:1px solid #dbdbdb;
+      border-radius:6px;
+      font-size:14px;
+      outline:none;
+      transition:box-shadow .12s, border-color .12s;
+      background:transparent;
+    }
+    input:focus{box-shadow:0 0 0 3px rgba(0,149,246,0.08); border-color:var(--accent)}
+    button{
+      height:44px;
+      border-radius:6px;
+      border:none;
+      background:var(--accent);
+      color:white;
+      font-weight:600;
+      cursor:pointer;
+      font-size:15px;
+    }
+    .or{display:flex;align-items:center;gap:12px;margin:12px 0;color:var(--muted);font-size:13px}
+    .or:before,.or:after{content:"";flex:1;height:1px;background:#e9e9e9;border-radius:2px}
+    .meta{margin-top:12px;text-align:center;color:var(--muted);font-size:13px}
+
+    /* small helper text */
+    .help{color:#c0392b;font-size:13px;margin-top:6px;display:none}
+
+    /* responsive */
+    @media (max-width:640px){
+      .wrap{padding:18px}
+      .card{width:100%;}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <div class="branding">
+        <div class="logo">InstaClone</div>
+        <div class="sub">Sign in to see photos and videos from your friends</div>
+      </div>
+
+      <form id="loginForm" autocomplete="on" novalidate>
+        <input type="text" id="user" name="user" placeholder="Phone number, username or email" required>
+        <input type="password" id="pass" name="pass" placeholder="Password" required>
+        <div class="help" id="help">Please enter both username and password.</div>
+        <button type="submit">Log In</button>
+      </form>
+
+      <div class="or"> <span>OR</span> </div>
+
+      <div style="text-align:center;">
+        <a href="#" onclick="alert('Third-party login demo');return false;" style="text-decoration:none;color:var(--muted);font-size:14px;">Log in with Demo Provider</a>
+      </div>
+
+      <div class="meta">Forgot your password? <a href="#" onclick="alert('Password reset demo');return false;">Reset it</a></div>
+    </div>
+  </div>
+
+  <script>
+    // Basic client-side demo logic. NEVER store real passwords in plaintext.
+    const form = document.getElementById('loginForm');
+    const help = document.getElementById('help');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const user = document.getElementById('user').value.trim();
+      const pass = document.getElementById('pass').value;
+      if(!user || !pass){
+        help.style.display = 'block';
+        return;
+      }
+      help.style.display = 'none';
+
+      // Demo: don't send real credentials anywhere. Show a friendly message instead.
+      // For a real app you'd POST to your server here (over HTTPS) and handle auth securely.
+      alert('Demo login successful (this is a front-end mock).\nUsername: '+user);
+
+      // Clear password field
+      document.getElementById('pass').value = '';
+    });
+  </script>
+</body>
+</html>
+
